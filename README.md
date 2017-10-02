@@ -29,7 +29,7 @@ vact = vad(speech_data, speech_data_fs)
 
 
 ## Example
-Please see `example.ipynb` or `example.html` jupyter notebook.
+Please see `example.ipynb` jupyter notebook.
 
 ## License
 MIT License (see `LICENSE` file).
