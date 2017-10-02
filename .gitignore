@@ -1,0 +1,7 @@
+*.pyc
+.*/
+*.wav
+.python-version
+pyvad.egg-info/*
+*kernel*.json
+dist*
