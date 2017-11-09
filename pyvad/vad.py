@@ -74,6 +74,8 @@ def vad(data, fs, fs_vad=16000, hoplength=30, vad_mode=0):
     # resampling
     if fs != fs_vad:
         resampled = resample(data, fs, fs_vad)
+    else:
+        resampled = data
 
     resampled = resampled.astype('int16')
 
