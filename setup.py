@@ -17,7 +17,7 @@ tests_requires = [
 
 setup(
     name='pyvad',
-    version='0.0.3',
+    version='0.0.4',
     description='py-webrtcvad wrapper for Easy to use of Voice activity detection in python',
     author='Fumiaki Taguchi',
     author_email='fumiaki.taguchi@gmail.com',
