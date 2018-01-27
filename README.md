@@ -1,5 +1,5 @@
 # [py-webrtcvad](https://github.com/wiseman/py-webrtcvad) wrapper for Easy to use of Voice activity detection in python
-
+[![Build Status](https://travis-ci.org/F-Tag/python-vad.svg?branch=master)](https://travis-ci.org/F-Tag/python-vad)
 
 ## Requirement
 [numpy](https://github.com/numpy/numpy), 
