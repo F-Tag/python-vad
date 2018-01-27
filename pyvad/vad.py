@@ -60,9 +60,9 @@ def vad(data, fs, fs_vad=16000, hoplength=30, vad_mode=0):
         data = data.astype('f')
 
     elif data.dtype.kind == 'f':
-        if np.abs(data).max() > 1:
+        if np.abs(data).max() >= 1:
             raise ValueError(
-                'when data type is int, data must be -1.0 < data < 1.0.')
+                'when data type is float, data must be -1.0 < data < 1.0.')
         data = (data * 2**15).astype('f')
     else:
         raise ValueError('data dtype must be int or float.')
