@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import array
-
 import numpy as np
 import webrtcvad
 from librosa.core import resample
@@ -87,7 +85,6 @@ def vad(data, fs, fs_vad=16000, hoplength=30, vad_mode=0):
 
     vad = webrtcvad.Vad()
     vad.set_mode(vad_mode)
-    # valist = [vad.is_speech(array.array('h', tmp).tostring(), fs_vad) for tmp in framed]
     valist = [vad.is_speech(tmp.tobytes(), fs_vad) for tmp in framed]
 
     hop_origin = fs * hoplength // 1000
