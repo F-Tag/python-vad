@@ -3,6 +3,7 @@
 
 from itertools import product
 
+import numpy as np
 from librosa import load
 from pyvad import trim
 
@@ -16,8 +17,8 @@ data, fs = load(name, sr=None)
 for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
     vact = trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0)
 
-name = "noise.wav"
-data, fs = load(name, sr=None)
+fs = 16000
+data = (np.random.rand(fs*3)-0.5)*0.1
 
 for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
     vact = trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0)
