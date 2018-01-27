@@ -12,3 +12,4 @@ install:
 script:
   - cd test
   - python vad_test.py
+  - python trim_test.py
