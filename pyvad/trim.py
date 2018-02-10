@@ -49,12 +49,16 @@ def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr = 0.015):
         start_i = np.hstack((0,start_i))
     if len(start_i) > len(end_i):
         end_i = np.hstack((end_i, len(vact)-1))
+    
     thr_ind=[]
-
     for i, (s, e) in enumerate(zip(start_i, end_i)):
         power = np.mean(data[s:e]**2)**0.5
         if power > thr:
             thr_ind.append(i)
+
+    if len(thr_ind) == 0:
+        return None
+
     sec = (start_i[thr_ind[0]], end_i[thr_ind[-1]])
 
     return data[sec[0]:sec[1]]
