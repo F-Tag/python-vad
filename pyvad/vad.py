@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from warnings import warn
+
 import numpy as np
 import webrtcvad
 from librosa.core import resample
@@ -59,8 +61,8 @@ def vad(data, fs, fs_vad=16000, hoplength=30, vad_mode=0):
 
     elif data.dtype.kind == 'f':
         if np.abs(data).max() >= 1:
-            raise ValueError(
-                'when data type is float, data must be -1.0 < data < 1.0.')
+            data = data / np.abs(data).max() * 0.9
+            warn('input data was rescaled.')
         data = (data * 2**15).astype('f')
     else:
         raise ValueError('data dtype must be int or float.')
