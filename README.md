@@ -1,4 +1,4 @@
-# [py-webrtcvad](https://github.com/wiseman/py-webrtcvad) py-webrtcvad wrapper for trimming speech clips
+# [py-webrtcvad](https://github.com/wiseman/py-webrtcvad) wrapper for trimming speech clips
 [![Build Status](https://travis-ci.org/F-Tag/python-vad.svg?branch=master)](https://travis-ci.org/F-Tag/python-vad)
 
 ## Requirement
