@@ -3,7 +3,7 @@ import numpy as np
 
 from .vad import vad
 
-def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr = 0.015):
+def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr=0.015, return_sec=False):
     """ Voice activity detection.
     Trim leading and trailing silence from an audio signal by using vad.
     Parameters
@@ -61,4 +61,7 @@ def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr = 0.015):
 
     sec = (start_i[thr_ind[0]], end_i[thr_ind[-1]])
 
-    return data[sec[0]:sec[1]]
+    if return_sec:
+        data[sec[0]:sec[1]], sec
+    else:
+        return data[sec[0]:sec[1]]
