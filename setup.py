@@ -17,8 +17,8 @@ tests_requires = [
 
 setup(
     name='pyvad',
-    version='0.0.6',
-    description='py-webrtcvad wrapper for Easy to use of Voice activity detection in python',
+    version='0.0.7',
+    description='py-webrtcvad wrapper for trimming speech clips',
     author='Fumiaki Taguchi',
     author_email='fumiaki.taguchi@gmail.com',
     url='https://github.com/F-Tag/python-vad',
