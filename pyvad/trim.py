@@ -62,6 +62,6 @@ def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr=0.015, return_sec
     sec = (start_i[thr_ind[0]], end_i[thr_ind[-1]])
 
     if return_sec:
-        data[sec[0]:sec[1]], sec
+        return data[sec[0]:sec[1]], sec
     else:
         return data[sec[0]:sec[1]]
