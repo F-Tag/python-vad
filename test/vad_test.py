@@ -3,21 +3,27 @@
 
 from itertools import product
 
+import numpy as np
 from librosa import load
+
 from pyvad import vad
 
 fs_vads = (8000, 16000, 32000, 48000)
 hops = (10, 20, 30)
 vad_modes = (0, 1, 2, 3)
+fss = [16000, 22050]
 
 name = "voice/arctic_a0007.wav"
-data, fs = load(name, sr=None)
 
-for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
-    vact = vad(data, fs, fs_vad=16000, hop_length=30, vad_mode=0)
+for fs in fss:
 
+    data, fs_r = load(name, sr=fs)
+    for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
+        vact = vad(data, fs_r, fs_vad=fs_vad,
+                   hop_length=hop, vad_mode=vad_mode)
+        assert vact.any()
 
-data, fs = load(name, sr=22050)
-
-for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
-    vact = vad(data, fs, fs_vad=16000, hop_length=30, vad_mode=0)
+    data = (np.random.rand(fs*3)-0.5)*0.1
+    for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
+        vact = vad(data, fs, fs_vad=fs_vad, hop_length=hop, vad_mode=vad_mode)
+        assert not vact.any()
