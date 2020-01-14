@@ -3,7 +3,7 @@ import numpy as np
 
 from .vad import vad
 
-def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr=0.015, return_sec=False):
+def trim(data, fs, fs_vad=16000, hop_length=30, vad_mode=0, thr=0.015, return_sec=False):
     """ Voice activity detection.
     Trim leading and trailing silence from an audio signal by using vad.
     Parameters
@@ -19,9 +19,9 @@ def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr=0.015, return_sec
         Sampling frequency for webrtcvad.
         fs_vad must be 8000, 16000, 32000 or 48000.
         Default is 16000.
-    hoplength : int, optional
+    hop_length : int, optional
         Step size[milli second].
-        hoplength must be 10, 20, or 30.
+        hop_length must be 10, 20, or 30.
         Default is 0.1.
     vad_mode : int, optional
         set vad aggressiveness.
@@ -35,7 +35,7 @@ def trim(data, fs, fs_vad=16000, hoplength=30, vad_mode=0, thr=0.015, return_sec
         trimed_data. trimed input data.
         If voice activity can't be detected, return None.
     """
-    vact = vad(data, fs, fs_vad, hoplength, vad_mode)
+    vact = vad(data, fs, fs_vad, hop_length, vad_mode)
     vact_diff = np.diff(vact).astype('int')
     start_i = np.where(vact_diff == 1)[0]
     end_i =   np.where(vact_diff == -1)[0]
