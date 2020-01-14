@@ -3,7 +3,41 @@ import numpy as np
 
 from .vad import vad
 
-def trim(data, fs, fs_vad=16000, hop_length=30, vad_mode=0, thr=0.015, return_sec=False):
+
+def _get_edges(vact):
+
+    edges = np.flatnonzero(np.diff(vact.astype(int)))
+    edges = edges + 1
+
+    if vact[0]:
+        edges = np.hstack((0, edges))
+
+    if vact[-1]:
+        edges = np.hstack((0, vact.size))
+
+    edges = np.minimum(edges, vact.size).reshape(-1, 2)
+    edges = edges[(edges[:, 1] - edges[:, 0]) > 0]
+
+    return edges
+
+
+def _rms(arr):
+    return np.sqrt((arr**2.0).mean())
+
+
+def _drop_silence(waveform, edges, threshold_db):
+
+    rms = []
+    for s, e in edges:
+        rms.append(_rms(waveform[s:e]))
+
+    rms = 20 * np.log10(rms)
+
+    return edges[rms >= threshold_db]
+
+
+def trim(data, fs, fs_vad=16000,
+         hop_length=30, vad_mode=0, threshold_db=-35.0):
     """ Voice activity detection.
     Trim leading and trailing silence from an audio signal by using vad.
     Parameters
@@ -31,37 +65,19 @@ def trim(data, fs, fs_vad=16000, hop_length=30, vad_mode=0, thr=0.015, return_se
 
     Returns
     -------
-    trimed_data : ndarray
-        trimed_data. trimed input data.
-        If voice activity can't be detected, return None.
+    (start_index, end_index) : int
+        trimed waveform is data[start_index:end_index]
+        If voice activity can't be detected, return 0, 0.
     """
+
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
-    vact_diff = np.diff(vact).astype('int')
-    start_i = np.where(vact_diff == 1)[0]
-    end_i =   np.where(vact_diff == -1)[0]
-    if len(start_i) == 0 and  len(end_i) == 0:
-        return None
-    if len(start_i) < 1:
-        start_i = np.hstack((end_i, 0))
-    if len(end_i) < 1:
-        end_i = np.hstack((end_i, len(vact)-1))
-    if end_i[0] <= start_i[0]:
-        start_i = np.hstack((0,start_i))
-    if len(start_i) > len(end_i):
-        end_i = np.hstack((end_i, len(vact)-1))
-    
-    thr_ind=[]
-    for i, (s, e) in enumerate(zip(start_i, end_i)):
-        power = np.mean(data[s:e]**2)**0.5
-        if power > thr:
-            thr_ind.append(i)
 
-    if len(thr_ind) == 0:
-        return None
+    edges = _get_edges(vact)
+    edges = _drop_silence(data, edges, threshold_db)
 
-    sec = (start_i[thr_ind[0]], end_i[thr_ind[-1]])
+    edges = edges.ravel()
 
-    if return_sec:
-        return data[sec[0]:sec[1]], sec
+    if edges.any():
+        return edges[0], edges[-1]
     else:
-        return data[sec[0]:sec[1]]
+        return 0, 0
