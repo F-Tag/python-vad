@@ -14,11 +14,9 @@ $ pip install pyvad
 
 or
 
-via sorce
+from github repository
 ```sh
-$ git clone https://github.com/F-Tag/python-vad.git
-$ cd python-vad
-$ python setup.py install
+$ pip install git+https://github.com/F-Tag/python-vad.git
 ```
 
 ## Usage
