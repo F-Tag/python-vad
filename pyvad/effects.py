@@ -123,9 +123,8 @@ def split(data, fs, fs_vad=16000,
 
     Returns
     -------
-    (start_index, end_index) : int
-        trimed waveform is data[start_index:end_index]
-        If voice activity can't be detected, return 0, 0.
+    speech segments : list of numpy.ndarray
+        If voice activity can't be detected, return [].
     """
 
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
