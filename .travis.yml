@@ -14,3 +14,4 @@ script:
   - cd test
   - python vad_test.py
   - python trim_test.py
+  - python split_test.py
