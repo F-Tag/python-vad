@@ -4,11 +4,11 @@
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyvad.svg)](https://pypi.org/project/pyvad/)
 
 ## Announcement
-The version 1.0.0 update break backward compatibility.
+The version 0.1.0 update break backward compatibility.
 
-The previous version is 0.8.0.
+The previous version is 0.0.8.
 ```sh
-$ pip install pyvad==0.8.0
+$ pip install pyvad==0.0.8
 ```
 
 The changes are as follows:
