@@ -123,8 +123,9 @@ def split(data, fs, fs_vad=16000,
 
     Returns
     -------
-    speech segments : list of numpy.ndarray
-        If voice activity can't be detected, return [].
+    edges : np.ndarray, shape=(m, 2)
+        `edges[i] == (start_i, end_i)` are the start and end time
+        (in samples) of non-silent interval `i`.
     """
 
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
@@ -133,4 +134,4 @@ def split(data, fs, fs_vad=16000,
     edges = edges[(edges[:, 1] - edges[:, 0]) > fs*min_dur]
     edges = _drop_silence(data, edges, threshold_db)
 
-    return [data[edge[0]:edge[1]] for edge in edges]
+    return edges
