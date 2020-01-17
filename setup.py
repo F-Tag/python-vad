@@ -19,6 +19,8 @@ setup(
     name='pyvad',
     version='0.1.1',
     description='py-webrtcvad wrapper for trimming speech clips',
+    long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
     author='Fumiaki Taguchi',
     author_email='fumiaki.taguchi@gmail.com',
     url='https://github.com/F-Tag/python-vad',
