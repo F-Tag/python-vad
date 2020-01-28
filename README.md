@@ -6,17 +6,18 @@
 ## Announcement
 The version 0.1.0 update break backward compatibility.
 
-The previous version is 0.0.8.
-```sh
-$ pip install pyvad==0.0.8
-```
-
 The changes are as follows:
 1. The `hoplength` argument has been changed to `hop_length`.
 2. The `trim` returns (start_index, end_index) (`return_sec` argument is abolished).
 3. Slightly changed the method of preprocessing a waveform in `vad`.
+4. End of support for python 2.x.
 
 You can see the new API in the `example.ipynb`.
+
+The previous version is 0.0.8.
+```sh
+$ pip install pyvad==0.0.8
+```
 
 ## Requirement
 [numpy](https://github.com/numpy/numpy), 
