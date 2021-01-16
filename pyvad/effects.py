@@ -13,7 +13,7 @@ def _get_edges(vact):
         edges = np.hstack((0, edges))
 
     if vact[-1]:
-        edges = np.hstack((0, vact.size))
+        edges = np.hstack((edges, vact.size))
 
     edges = np.minimum(edges, vact.size).reshape(-1, 2)
     edges = edges[(edges[:, 1] - edges[:, 0]) > 0]
@@ -37,7 +37,8 @@ def _drop_silence(waveform, edges, threshold_db):
 
 
 def trim(data, fs, fs_vad=16000,
-         hop_length=30, vad_mode=0, threshold_db=-35.0):
+         hop_length=30, vad_mode=0,
+         threshold_db=-35.0, min_dur=0.2):
     """
     Trim leading and trailing silence from an speech waveform by using vad.
     Parameters
@@ -65,6 +66,9 @@ def trim(data, fs, fs_vad=16000,
     threshold_db : float, optional
         The threshold level (in dB) below reference to consider as silence.
         Default is -35.0.
+    min_dur : float, optional
+        The minimum duration (in seconds) of each speech segment.
+        Default is 0.5.
 
     Returns
     -------
@@ -76,6 +80,7 @@ def trim(data, fs, fs_vad=16000,
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
 
     edges = _get_edges(vact)
+    edges = edges[(edges[:, 1] - edges[:, 0]) > fs*min_dur]
     edges = _drop_silence(data, edges, threshold_db)
 
     edges = edges.ravel()
