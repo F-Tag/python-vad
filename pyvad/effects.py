@@ -36,6 +36,18 @@ def _drop_silence(waveform, edges, threshold_db):
     return edges[rms >= threshold_db]
 
 
+def _merge_short_silence(edges, max_samples):
+
+    ret = [edges[0].tolist()]
+    for s, e in edges[1:]:
+        if s - ret[-1][-1] < max_samples:
+            ret[-1][-1] = e
+        else:
+            ret.append([s, e])
+
+    return np.asarray(ret)
+
+
 def trim(data, fs, fs_vad=16000,
          hop_length=30, vad_mode=0,
          threshold_db=-35.0, min_dur=0.2):
@@ -80,6 +92,7 @@ def trim(data, fs, fs_vad=16000,
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
 
     edges = _get_edges(vact)
+    edges = _merge_short_silence(edges, fs*0.1)
     edges = edges[(edges[:, 1] - edges[:, 0]) > fs*min_dur]
     edges = _drop_silence(data, edges, threshold_db)
 
@@ -136,6 +149,7 @@ def split(data, fs, fs_vad=16000,
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
 
     edges = _get_edges(vact)
+    edges = _merge_short_silence(edges, fs*0.1)
     edges = edges[(edges[:, 1] - edges[:, 0]) > fs*min_dur]
     edges = _drop_silence(data, edges, threshold_db)
 
