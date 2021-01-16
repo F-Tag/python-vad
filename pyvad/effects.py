@@ -37,6 +37,8 @@ def _drop_silence(waveform, edges, threshold_db):
 
 
 def _merge_short_silence(edges, max_samples):
+    if len(edges) == 0:
+        return edges
 
     ret = [edges[0].tolist()]
     for s, e in edges[1:]:
