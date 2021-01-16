@@ -17,7 +17,7 @@ tests_requires = [
 
 setup(
     name='pyvad',
-    version='0.1.1',
+    version='0.1.2',
     description='py-webrtcvad wrapper for trimming speech clips',
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
@@ -33,7 +33,6 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
