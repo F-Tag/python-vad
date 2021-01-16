@@ -94,6 +94,10 @@ def vad(data, fs, fs_vad=16000, hop_length=30, vad_mode=0):
     vad.set_mode(vad_mode)
     valist = [vad.is_speech(tmp.tobytes(), fs_vad) for tmp in framed]
 
+    # smoothing
+    valist = np.asarray(valist).astype("float")
+    valist = np.convolve(valist, np.ones(3) / 3, mode='same') > 0
+
     hop_origin = fs * hop_length // 1000
     va_framed = np.zeros([len(valist), hop_origin])
     va_framed[valist] = 1
