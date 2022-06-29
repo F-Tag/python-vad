@@ -32,6 +32,7 @@ webrtcvad = "^2.0.10"
 pysen = {version = "0.10.2", extras = ["lint"]}
 pytest = "^7.1.2"
 pysptk = "^0.1.21"
+jupyterlab = "^3.4.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
