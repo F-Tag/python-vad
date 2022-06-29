@@ -35,11 +35,11 @@ pysptk = "^0.1.21"
 jupyterlab = "^3.4.3"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.setuptools_scm]
-write_to = "pyvad/_version.py"
+[tool.poetry-dynamic-versioning]
+enable = true
 
 [tool.pysen]
 version = "0.10"
