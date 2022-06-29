@@ -1,5 +1,4 @@
 *.pyc
-.*/
 .python-version
 pyvad.egg-info/*
 *kernel*.json
