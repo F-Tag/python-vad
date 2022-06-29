@@ -12,7 +12,8 @@ install_requires = [
 
 tests_requires = [
     'mock',
-    'nose']
+    'nose',
+    "pysptk"]
 
 
 setup(
