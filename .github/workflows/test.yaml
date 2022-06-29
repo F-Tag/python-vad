@@ -47,7 +47,7 @@ jobs:
         run: |
           sudo apt install libsndfile1-dev
           pip install -U pip
-          pip install -e .
+          pip install .
           cd test
           python vad_test.py
           python trim_test.py
