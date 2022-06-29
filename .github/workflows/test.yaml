@@ -2,14 +2,15 @@ name: pytest
 
 # トリガー
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
   pull_request:
-    types: [opened, reopened, edited]
+    types: [opened, reopened, edited, synchronize]
     branches:
       - master
-  workflow_dispatch:
+  
 
 # 実行job
 jobs:
