@@ -1,23 +1,7 @@
 # [py-webrtcvad](https://github.com/wiseman/py-webrtcvad) wrapper for trimming speech clips
-[![Build Status](https://travis-ci.org/F-Tag/python-vad.svg?branch=master)](https://travis-ci.org/F-Tag/python-vad)
+[![Build](https://github.com/F-Tag/python-vad/actions/workflows/test.yaml/badge.svg)](https://github.com/F-Tag/python-vad/actions/workflows/test.yaml)
 [![PyPI version](https://badge.fury.io/py/pyvad.svg)](https://badge.fury.io/py/pyvad)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pyvad.svg)](https://pypi.org/project/pyvad/)
-
-## Announcement
-The version 0.1.0 update break backward compatibility.
-
-The changes are as follows:
-1. The `hoplength` argument has been changed to `hop_length`.
-2. The `trim` returns (start_index, end_index) (`return_sec` argument is abolished).
-3. Slightly changed the method of preprocessing a waveform in `vad`.
-4. End of support for python 2.x.
-
-You can see the new API in the `example.ipynb`.
-
-The previous version is 0.0.8.
-```sh
-$ pip install pyvad==0.0.8
-```
 
 ## Requirement
 [numpy](https://github.com/numpy/numpy), 
@@ -49,3 +33,19 @@ Please see `example.ipynb` jupyter notebook.
 
 ## License
 MIT License (see `LICENSE` file).
+
+## Announcement
+The version 0.1.0 update break backward compatibility.
+
+The changes are as follows:
+1. The `hoplength` argument has been changed to `hop_length`.
+2. The `trim` returns (start_index, end_index) (`return_sec` argument is abolished).
+3. Slightly changed the method of preprocessing a waveform in `vad`.
+4. End of support for python 2.x.
+
+You can see the new API in the `example.ipynb`.
+
+The previous version is 0.0.8.
+```sh
+$ pip install pyvad==0.0.8
+```
