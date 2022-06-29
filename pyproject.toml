@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "pyvad"
+version = "0.0.0"
+description = "'py-webrtcvad wrapper for trimming speech clips'"
+authors = ["Fumiaki Taguchi"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/F-Tag/python-vad"
+repository = "https://github.com/F-Tag/python-vad"
+classifiers=[
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+        'Topic :: Multimedia :: Sound/Audio',
+        'Topic :: Multimedia :: Sound/Audio :: Analysis',
+        'Topic :: Multimedia :: Sound/Audio :: Speech',
+        'Topic :: Scientific/Engineering :: Information Analysis',
+        'Topic :: Scientific/Engineering :: Human Machine Interfaces',
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.23.0"
+librosa = "^0.9.2"
+webrtcvad = "^2.0.10"
+
+[tool.poetry.dev-dependencies]
+pysen = {version = "0.10.2", extras = ["lint"]}
+pytest = "^7.1.2"
+pysptk = "^0.1.21"
+jupyterlab = "^3.4.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+style = "pep440"
+
+[tool.pysen]
+version = "0.10"
+
+[tool.pysen.lint]
+enable_black = true
+enable_flake8 = true
+enable_isort = true
+enable_mypy = false
+mypy_preset = "strict"
+line_length = 88
+py_version = "py38"
+[[tool.pysen.lint.mypy_targets]]
+  paths = ["."]

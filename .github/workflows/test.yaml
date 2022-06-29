@@ -7,7 +7,7 @@ on:
     branches:
       - master
   pull_request:
-    types: [opened, reopened, edited, synchronize]
+    types: [opened, reopened, synchronize]
     branches:
       - master
   
@@ -21,7 +21,7 @@ jobs:
     # 複数の Python のバージョンでテストするために `strategy.matrix` を設定する
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, "3.10"]
+        python-version: [3.8, 3.9]
     steps:
       # リポジトリをチェックアウトする
       - name: Checkout
@@ -43,11 +43,14 @@ jobs:
       # - name: Install Dependencies
       #   run: poetry install --no-interaction
       # test を実行
+      - name: apt install dependencies
+        run: sudo apt install libsndfile1-dev clang-9
+      - name: pip install package
+        run: |
+          pip install -U pip
+          pip install .
       - name: Run Tests
         run: |
-          sudo apt install libsndfile1-dev
-          pip install -U pip
-          pip install -e .
           cd test
           python vad_test.py
           python trim_test.py
