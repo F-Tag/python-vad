@@ -1,0 +1,52 @@
+name: pytest
+
+# トリガー
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened, edited]
+    branches:
+      - master
+  workflow_dispatch:
+
+# 実行job
+jobs:
+  pytest:
+    name: Run tests with pytest
+    # 実行環境として `ubuntu-latest` という名前のものを選ぶ
+    runs-on: ubuntu-latest
+    # 複数の Python のバージョンでテストするために `strategy.matrix` を設定する
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9, 3.10]
+    steps:
+      # リポジトリをチェックアウトする
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Python のセットアップ
+      # See: https://github.com/actions/setup-python
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      # # Poetry そのものをインストールする
+      # - name: Install Poetry
+      #   run: |
+      #     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+      # # Poetry へのパスを通す
+      # - name: Add path for Poetry
+      #   run: echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+      # # インストールした Poetry を使って必要な Python パッケージをインストールする
+      # - name: Install Dependencies
+      #   run: poetry install --no-interaction
+      # test を実行
+      - name: Run Tests
+        run: |
+          pip install -U pip
+          pip install -e .
+          cd test
+          python vad_test.py
+          python trim_test.py
+          python split_test.py
