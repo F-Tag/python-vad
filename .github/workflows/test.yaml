@@ -44,7 +44,7 @@ jobs:
       #   run: poetry install --no-interaction
       # test を実行
       - name: apt install dependencies
-        run: sudo apt install libsndfile1-dev llvm
+        run: sudo apt install libsndfile1-dev clang-9
       - name: pip install package
         run: |
           pip install -U pip
