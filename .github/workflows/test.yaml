@@ -21,7 +21,7 @@ jobs:
     # 複数の Python のバージョンでテストするために `strategy.matrix` を設定する
     strategy:
       matrix:
-        python-version: [3.8, 3.9, "3.10"]
+        python-version: [3.8, 3.9]
     steps:
       # リポジトリをチェックアウトする
       - name: Checkout
