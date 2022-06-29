@@ -4,3 +4,4 @@ pyvad.egg-info/*
 *kernel*.json
 dist*
 build
+poetry.lock
