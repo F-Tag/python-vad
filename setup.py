@@ -13,7 +13,6 @@ install_requires = [
 tests_requires = [
     'mock',
     'nose',
-    "PySoundFile",
     "pysptk"]
 
 
