@@ -43,11 +43,14 @@ jobs:
       # - name: Install Dependencies
       #   run: poetry install --no-interaction
       # test を実行
-      - name: Run Tests
+      - name: apt install dependencies
+        run: sudo apt install libsndfile1-dev llvm
+      - name: pip install package
         run: |
-          sudo apt install libsndfile1-dev llvm
           pip install -U pip
           pip install .
+      - name: Run Tests
+        run: |
           cd test
           python vad_test.py
           python trim_test.py
