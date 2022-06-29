@@ -24,6 +24,7 @@ jobs:
           pip install poetry poetry-dynamic-versioning twine
       - name: Build and publish
         run: |
+          git tag
           poetry-dynamic-versioning
           poetry build --verbose
 
