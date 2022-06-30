@@ -1,4 +1,3 @@
-
 import numpy as np
 
 from .vad import vad
@@ -22,7 +21,7 @@ def _get_edges(vact):
 
 
 def _rms(arr):
-    return np.sqrt((arr**2.0).mean())
+    return np.sqrt((arr ** 2.0).mean())
 
 
 def _drop_silence(waveform, edges, threshold_db):
@@ -50,9 +49,9 @@ def _merge_short_silence(edges, max_samples):
     return np.asarray(ret)
 
 
-def trim(data, fs, fs_vad=16000,
-         hop_length=30, vad_mode=0,
-         threshold_db=-35.0, min_dur=0.2):
+def trim(
+    data, fs, fs_vad=16000, hop_length=30, vad_mode=0, threshold_db=-35.0, min_dur=0.2
+):
     """
     Trim leading and trailing silence from an speech waveform by using vad.
     Parameters
@@ -94,8 +93,8 @@ def trim(data, fs, fs_vad=16000,
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
 
     edges = _get_edges(vact)
-    edges = _merge_short_silence(edges, fs*0.1)
-    edges = edges[(edges[:, 1] - edges[:, 0]) > fs*min_dur]
+    edges = _merge_short_silence(edges, fs * 0.1)
+    edges = edges[(edges[:, 1] - edges[:, 0]) > fs * min_dur]
     edges = _drop_silence(data, edges, threshold_db)
 
     edges = edges.ravel()
@@ -106,10 +105,10 @@ def trim(data, fs, fs_vad=16000,
         return 0, 0
 
 
-def split(data, fs, fs_vad=16000,
-          hop_length=30, vad_mode=0,
-          threshold_db=-35.0, min_dur=0.5):
-    """ 
+def split(
+    data, fs, fs_vad=16000, hop_length=30, vad_mode=0, threshold_db=-35.0, min_dur=0.5
+):
+    """
     Split a speech waveform into non-silent intervals by using vad.
 
     Parameters
@@ -151,8 +150,8 @@ def split(data, fs, fs_vad=16000,
     vact = vad(data, fs, fs_vad, hop_length, vad_mode)
 
     edges = _get_edges(vact)
-    edges = _merge_short_silence(edges, fs*0.1)
-    edges = edges[(edges[:, 1] - edges[:, 0]) > fs*min_dur]
+    edges = _merge_short_silence(edges, fs * 0.1)
+    edges = edges[(edges[:, 1] - edges[:, 0]) > fs * min_dur]
     edges = _drop_silence(data, edges, threshold_db)
 
     return edges

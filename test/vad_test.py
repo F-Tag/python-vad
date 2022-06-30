@@ -4,7 +4,6 @@
 from itertools import product
 
 from librosa import load
-
 from pyvad import vad
 
 fs_vads = (8000, 16000, 32000, 48000)
@@ -19,9 +18,8 @@ for fs in fss:
     data, fs_r = load(name, sr=fs)
     for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
         # print(fs, fs_vad, hop, vad_mode)
-        vact = vad(data, fs_r, fs_vad=fs_vad,
-                   hop_length=hop, vad_mode=vad_mode)
-        assert vact.sum() > data.size//2, vact.sum()
+        vact = vad(data, fs_r, fs_vad=fs_vad, hop_length=hop, vad_mode=vad_mode)
+        assert vact.sum() > data.size // 2, vact.sum()
 
         """
         import matplotlib.pyplot as plt

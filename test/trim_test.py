@@ -19,7 +19,7 @@ for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
     assert vact[1] - vact[0] > 0, vact
 
 
-data = (np.random.rand(fs*3)-0.5)*0.05
+data = (np.random.rand(fs * 3) - 0.5) * 0.05
 for fs_vad, hop, vad_mode in product(fs_vads, hops, vad_modes):
     vact = trim(data, fs, fs_vad=fs_vad, hop_length=hop, vad_mode=vad_mode)
     assert vact[1] - vact[0] == 0, vact
