@@ -76,7 +76,7 @@ def vad(data, fs, fs_vad=16000, hop_length=30, vad_mode=0):
 
     # resampling
     if fs != fs_vad:
-        resampled = resample(data, fs, fs_vad)
+        resampled = resample(data, orig_sr=fs, target_sr=fs_vad)
         if np.abs(resampled).max() > 1.0:
             resampled *= 0.99 / np.abs(resampled).max()
             warn("Resampling causes data clipping. data was rescaled.")
