@@ -13,8 +13,8 @@ on:
 
 # 実行job
 jobs:
-  pytest:
-    name: Run tests with pytest
+  lint:
+    name: Run pysen lint
     runs-on: ubuntu-latest
     steps:
       # リポジトリのチェックアウト
