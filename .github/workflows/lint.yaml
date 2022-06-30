@@ -1,0 +1,38 @@
+name: pysen lint
+
+# トリガー
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+
+# 実行job
+jobs:
+  lint:
+    name: Run pysen lint
+    runs-on: ubuntu-latest
+    steps:
+      # リポジトリのチェックアウト
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Python のセットアップ
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      # Poetry をインストールする
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH
+      # インストールした Poetry を使って必要な Python パッケージをインストール
+      - name: Install Dependencies
+        run: poetry install --no-interaction
+      # lint を実行
+      - name: pysen lint
+        run: poetry run pysen run lint
