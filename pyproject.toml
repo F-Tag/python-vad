@@ -41,6 +41,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry-dynamic-versioning]
 enable = true
 style = "pep440"
+vcs = "git"
 
 [tool.pysen]
 version = "0.10"
